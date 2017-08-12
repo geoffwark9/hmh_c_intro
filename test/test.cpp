@@ -3,7 +3,11 @@
 /*
 multi-line comment
 */
-void foo(void) // Function signature or prototype
+
+// Function declaration
+void foo(void);
+
+void foo(void) // Function signature or prototype... or definition
 {
 	OutputDebugStringA(
 		"This is the first thing we have actually printed.\n");
