@@ -1,4 +1,5 @@
 #include <windows.h>
+#include <stdio.h>
 
 /*
 multi-line comment
@@ -19,6 +20,11 @@ void foo(void) // Function signature or prototype... or definition
 	
 	OutputDebugStringA(
 		"Line 0\\Line 1\n");
+	// WINDOWS - \r\n
+	// Unix - \n
+	// This gets translated by Windows so you don't need the \r in most cases.
+
+	printf("\nThis is a thing.\n");
 }
 
 
@@ -29,7 +35,7 @@ int CALLBACK WinMain(
 	int nCmdShow)
 {
 	char SmallS; // 8 bits  -  256 different values (-128 to 127)
-	char unsigned SmallU; // 8 bits unsigned  -  256 diff values (0 to 255)
+	signed char SmallU; // 8 bits unsigned  -  256 diff values (0 to 255)
 
 	short MediumS; // 16 bits  - 65536
 	short unsigned  MediumU;
