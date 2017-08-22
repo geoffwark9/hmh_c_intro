@@ -42,6 +42,22 @@ void foo(void) // Function signature or prototype... or definition
 	bar();
 }
 
+// pragma
+// __attribute__
+// use above to do the memory they way you want (aka 'pack tightly')
+// not really discussed tonight
+struct projectile
+{
+	char unsigned IsThisOnFire; // NOTE(geoff): 1 if it's on fire, 8 if it's not
+	int Damage; // NOTE(geoff): This is how much damage it does on impact
+	int ParticlesPerSecond; // NOTE(geoff): For special effects
+	short HowManyCooks; // NOTE(geoff): Too many cooks?
+
+	// 1 byte + 4 bytes + 4 bytes + 2 bytes = 11 bytes
+	// EXPECTED, but ACTUAL is 16 bytes
+
+};
+
 
 int CALLBACK WinMain(
 	HINSTANCE hInstance,
@@ -61,6 +77,7 @@ int CALLBACK WinMain(
 	*/
 	//int Integer;
 	
+	/*
 	char unsigned Test;
 	char unsigned *TestPointer;
 
@@ -77,7 +94,95 @@ int CALLBACK WinMain(
 	Integer = Integer + 5;
 	*/
 
-	foo();
+	//foo();
+	/*
+	
+	 0 - 0
+	 1 - 1
+	 2 - 2
+	 3 - 3
+	 4 - 4
+	 5 - 5
+	 6 - 6
+	 7 - 7
+	 8 - 8 
+	 9 - 9
+	10 - A
+	11 - B
+	12 - C
+	13 - D
+	14 - E
+	15 - F
+
+	0xA = 10
+	0xAA = 16*10 + 10 = 170
+	0xAAA = 16*16*10 + 16*10 + 10 = 
+
+	444 = 4*100 + 4*10 + 4
+	
+	*/
+
+	projectile Test;
+
+	int SizeOfChar = sizeof(char unsigned);
+	int SizeOfInt = sizeof(int);
+	int SizeOfProjectile = sizeof(projectile);
+	int SizeOfTest = sizeof(Test);
+
+
+	Test.IsThisOnFire = 1;
+	Test.Damage = 2;// + Test.IsThisOnFire; //if this came before the value of
+	                                           //Test.IsThisOnFire would be w/e it
+	                                           //was in memory (a bug)
+	Test.ParticlesPerSecond = 3;
+	Test.HowManyCooks = 4;
+
+	//projectile *ProjectilePointer = &Test;
+	unsigned short *MrPointerMan = (unsigned short *)&Test;
+
+	projectile Projectiles[40];
+
+	/*  For next stream
+	int WhichProjectile = 1;
+	if (WhichProjectile == 1)
+	{
+		// do something projectile 1
+	}
+	else
+	{
+		// do it to projectile 0
+	};*/
+
+	int WhichProjectile = 4;
+	Projectiles[WhichProjectile];
+
+	projectile *ProjectilePointer = Projectiles;
+
+	int SizeOfProjectiles = sizeof(Projectiles); // 16*40
+	int SizeOfProjectilePointer = sizeof(ProjectilePointer); // 4
+
+	Projectiles[30].Damage = 60;
+	(ProjectilePointer + 30)->Damage = 100;
+	((projectile *)((char *)ProjectilePointer + 30 * sizeof(projectile)))->Damage = 200;
+
+	char *BytePointer = (char *)ProjectilePointer;
+	BytePointer = BytePointer + 30 * sizeof(projectile);
+	projectile *Thirty = (projectile *)BytePointer;
+	Thirty->Damage = 300;
+
+	// .   for actual thing
+	// ->  for pointer
+	// compiler always tells you which to use if you fuck up
+
+
+	// little endian - x86, arm, x64
+	// big endian - powerpc
+
+//	Test = 2*1000*1000*1000;
+	//        52 1
+	//        15 2631
+	//        26 8426 8421
+	// 0000 0001 1111 0100 - little endian
 }
 
 
