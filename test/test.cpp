@@ -48,10 +48,15 @@ void foo(void) // Function signature or prototype... or definition
 // not really discussed tonight
 struct projectile
 {
-	char unsigned IsThisOnFire; // NOTE(geoff): 1 if it's on fire, 8 if it's not
-	int Damage; // NOTE(geoff): This is how much damage it does on impact
-	int ParticlesPerSecond; // NOTE(geoff): For special effects
-	short HowManyCooks; // NOTE(geoff): Too many cooks?
+	// NOTE(geoff): These are the members, or "fields", of this structure!
+
+	
+	short Damage; // NOTE(geoff): This is how much damage it does on impact
+	char Two;
+	short ParticlesPerSecond; // NOTE(geoff): For special effects
+	char One; // NOTE(geoff): 1 if it's on fire, 8 if it's not
+	char Three;
+	
 
 	// 1 byte + 4 bytes + 4 bytes + 2 bytes = 11 bytes
 	// EXPECTED, but ACTUAL is 16 bytes
@@ -124,7 +129,7 @@ int CALLBACK WinMain(
 
 	projectile Test;
 
-	int SizeOfChar = sizeof(char unsigned);
+	/*int SizeOfChar = sizeof(char unsigned);
 	int SizeOfInt = sizeof(int);
 	int SizeOfProjectile = sizeof(projectile);
 	int SizeOfTest = sizeof(Test);
@@ -153,7 +158,7 @@ int CALLBACK WinMain(
 		// do it to projectile 0
 	};*/
 
-	int WhichProjectile = 4;
+	/*int WhichProjectile = 4;
 	Projectiles[WhichProjectile];
 
 	projectile *ProjectilePointer = Projectiles;
@@ -182,7 +187,14 @@ int CALLBACK WinMain(
 	//        52 1
 	//        15 2631
 	//        26 8426 8421
-	// 0000 0001 1111 0100 - little endian
+	// 0000 0001 1111 0100 - little endian*/
+
+	int X = 16;
+	short Y = (short)X;
+	char Z = (char)X;
+
+	int *xPtr = &X;
+	short *yPtr = (short *)&X;
 }
 
 
