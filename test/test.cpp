@@ -76,12 +76,12 @@ int CALLBACK WinMain(
 
 	short MediumS; // 16 bits  - 65536
 	short unsigned  MediumU;
-	
+
 	int LargeS; // 32 bits -  4 billion
 	int unsigned LargeU;
 	*/
 	//int Integer;
-	
+
 	/*
 	char unsigned Test;
 	char unsigned *TestPointer;
@@ -101,7 +101,7 @@ int CALLBACK WinMain(
 
 	//foo();
 	/*
-	
+
 	 0 - 0
 	 1 - 1
 	 2 - 2
@@ -110,7 +110,7 @@ int CALLBACK WinMain(
 	 5 - 5
 	 6 - 6
 	 7 - 7
-	 8 - 8 
+	 8 - 8
 	 9 - 9
 	10 - A
 	11 - B
@@ -121,10 +121,10 @@ int CALLBACK WinMain(
 
 	0xA = 10
 	0xAA = 16*10 + 10 = 170
-	0xAAA = 16*16*10 + 16*10 + 10 = 
+	0xAAA = 16*16*10 + 16*10 + 10 =
 
 	444 = 4*100 + 4*10 + 4
-	
+
 	*/
 
 	projectile Test;
@@ -137,8 +137,8 @@ int CALLBACK WinMain(
 
 	Test.IsThisOnFire = 1;
 	Test.Damage = 2;// + Test.IsThisOnFire; //if this came before the value of
-	                                           //Test.IsThisOnFire would be w/e it
-	                                           //was in memory (a bug)
+											   //Test.IsThisOnFire would be w/e it
+											   //was in memory (a bug)
 	Test.ParticlesPerSecond = 3;
 	Test.HowManyCooks = 4;
 
@@ -189,12 +189,195 @@ int CALLBACK WinMain(
 	//        26 8426 8421
 	// 0000 0001 1111 0100 - little endian*/
 
+	/*
 	int X = 16;
 	short Y = (short)X;
 	char Z = (char)X;
 
 	int *xPtr = &X;
 	short *yPtr = (short *)&X;
+	*/
+
+	//int x = 5;
+	//int y = 10;
+	//int z = 12;
+
+	//PEMDAS
+	// can't infer - aka can't do (x+y)z must do (x+y)*z
+	//x = -y + (z + x)*z + y/z - z; // can't do powers (need to use function 'pow')
+
+	//     8421
+	// 00000001
+	// 00000100
+
+	// hex - shift bits
+	/*x = 0xA; // A = 10
+	x = x << 1;
+	x = x << 1;
+	x = x << 1;
+	x = x >> 1;
+	x = x >> 1;
+	x = x >> 1;
+	x = x << 1;
+	x = x >> 4;
+	x = x >> 4;
+	x = x << 4;
+	x = x << 4;
+	x = x << 4;
+	x = x << 4;
+	x = x << 4;
+	x = x << 4;*/
+
+	// bitwise operators
+
+	//x = (1 << 4) | (1 << 8) | (1 << 10) | (1 << 20);
+	//x = ~x; // inversion
+	/*x = x | (1 << 4);
+	x = x | (1 << 8);
+
+	x = x | (1 << 3);
+	x = x | (1 << 14);
+	x = x | (1 << 23);
+	x = x | (1 << 30);
+	x = x | (1 << 1);
+
+	y = ((1 << 4) | (1 << 31));
+	x = x & y;*/
+	//x = x ^ (1 << 8);
+
+	/*x = (1 << 4) | (1 << 8);
+	y = (1 << 8) | (1 << 16);
+	x = x^y; // xor
+	x = x^y;*/
+
+
+	// boolean (true or false)
+	//int x = 0; // FALSE  NOT TRUE  NOT SET
+	/*int y = 1; // TRUE  SET VALUE
+	int z = 9999; // TRUE  SET VALUE
+	int w = -1; // TRUE  SET VALUE
+
+	// Things are either zero or they are not.
+	int less = (z < w);
+	int greater = (z > w);
+	int equal = (z == w);
+	int notequal = (z != w);
+	int and = (less && greater);
+	//int xor = (less ^^ greater); logical xor?? this doesn't work
+	int xor = (less != greater);
+	// compiler may not be required to produce a 1 for true - could be any non-zero
+
+	// control flow - can use logical ops
+	/*if (xor)
+	{
+		OutputDebugStringA("Z is less than W\n");
+	}
+	else if (greater)
+	{
+		OutputDebugStringA("Z is greater than W\n");
+	}
+	else if (equal)
+	{
+		OutputDebugStringA("Z is equal to W\n");
+	}
+	else
+	{
+		OutputDebugStringA("WHAT???");
+	}*/
+
+	// loops
+	/*x = 0xa;
+
+	int condition = (x != 0);
+	//do
+	while (1)
+	{
+		x = x << 4;
+		//condition = (x != 0);
+		if (x != 0)
+		{
+			break;
+		}
+	} //while (x == 0);
+	*/
+
+	/*int x;
+
+	for (x = 0xa; // Once at the beginning
+		(x != 0); // This is the condition for the loop
+		x = x << 4) // The thing to do every iteration
+	{
+		// More stuff happens here!
+		OutputDebugStringA("We are in the loop\n");
+	}
+
+	// same thing as the for above
+	x = 0xa;
+	while (x != 0)
+	{
+		OutputDebugStringA("We are in the loop\n");
+		x = x << 4;
+	}*/
+
+	// switch statements
+	//int x = 3;
+	/*
+	// just a jump - doesn't stop executing - need to use break
+	switch (x)
+	{
+	case 0:
+		OutputDebugStringA("Case 0\n");
+		break;
+	case 1:
+		OutputDebugStringA("Case 1\n");
+		break;
+	case 2:
+		OutputDebugStringA("Case 2\n");
+		break;
+	case 3:
+		OutputDebugStringA("Case 3\n");
+		//break;
+		// NOTE(geoff): this falls through!
+	case 4:
+		OutputDebugStringA("Case 4\n");
+		break;
+	case 5:
+		OutputDebugStringA("Case 5\n");
+		break;
+	case 6:
+		OutputDebugStringA("Case 6\n");
+		break;
+	default:
+		OutputDebugStringA("Case is unknown\n");
+		break;
+	}*/
+
+	int y = 5;
+	int *ptr = 0;
+	// *ptr is int at the location of pointer
+	int **ptrptr = 0;
+
+	int *yptr0 = 0;
+	int *yptr1 = 0;
+
+	yptr0 = &y;
+
+	if (y == 5)
+	{
+		int x = 6; // only changed in the block
+		int y = 4;//diff y - "shadow" a var
+
+		yptr1 = &y;
+
+		ptr = &x;
+		ptrptr = &ptr;
+	} // compiler no longer obligated to use the space for shit above
+
+	y = (**ptrptr);
+	//(*ptr) = 5; // * as a prefix means 'talking about things this points to'
+	// indent doesn't matter for C just for humans
+	
+
 }
 
 
